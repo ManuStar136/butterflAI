@@ -1,0 +1,147 @@
+<!--
+  Generated template for the RegisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Erstelle Deinen Account</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <ion-slides pager="true" (ionSlideDrag)="slideChanged()">
+
+    <ion-slide>
+
+      <p>Als aller erstes musst Du eine gültige Email und ein Passwort vergeben.</p>
+
+      <form [formGroup]="registerForm">
+
+        <ion-item>
+          <ion-label floating>
+            Email:<sup class="mandatory">*</sup>
+          </ion-label>
+          <ion-input [formControl]="registerForm.controls['email']" type="text"></ion-input>
+        </ion-item>
+
+        <div *ngIf="!registerForm.controls.email.valid && registerForm.controls.email.dirty"
+             class="validator-error">
+          Bitte gib eine gültige Email ein.
+        </div>
+
+        <ion-item>
+          <ion-label floating>
+            Passwort:<sup class="mandatory">*</sup>
+          </ion-label>
+          <ion-input [formControl]="registerForm.controls['password']" type="password"></ion-input>
+        </ion-item>
+
+        <div
+          *ngIf="!registerForm.controls.password.valid && registerForm.controls.password.dirty"
+          class="validator-error">
+          Das Passwort muss zwischen 8 und 16 Zeichen lang sein, einen Groß- und Kleinbuchstaben, eine Zahl sowie ein
+          Sonderzeichen enthalten.
+        </div>
+
+        <div padding class="gdpr">
+          <div class="gdpr-checkbox">
+            <ion-checkbox padding [formControl]="registerForm.controls['gdpr']"></ion-checkbox>
+          </div>
+          <div class="gdpr-text">
+            <p>Hiermit willige ich in die bestehenden <a (click)="pushGDPR()">Datenschutzbestimmungen</a> ein.<sup class="mandatory">*</sup></p>
+          </div>
+        </div>
+
+
+      </form>
+
+    </ion-slide>
+
+    <ion-slide>
+
+      <p>Zur besseren Verarbeitung deiner Meldungen müssen wir wissen, wer Du bist.</p>
+
+      <form [formGroup]="registerForm">
+
+        <ion-item>
+          <ion-label floating>
+            Vorname:<sup class="mandatory">*</sup>
+          </ion-label>
+          <ion-input [formControl]="registerForm.controls['firstName']" type="text"></ion-input>
+        </ion-item>
+
+        <div
+          *ngIf="!registerForm.controls.firstName.valid && registerForm.controls.firstName.dirty"
+          class="validator-error">
+          Dein Vorname sollte nur Buchstaben enthalten.
+        </div>
+
+        <ion-item>
+          <ion-label floating>
+            Nachname:<sup class="mandatory">*</sup>
+          </ion-label>
+          <ion-input [formControl]="registerForm.controls['lastName']" type="text"></ion-input>
+        </ion-item>
+
+        <div
+          *ngIf="!registerForm.controls.lastName.valid && registerForm.controls.lastName.dirty"
+          class="validator-error">
+          Dein Nachname sollte nur Buchstaben enthalten.
+        </div>
+
+      </form>
+
+    </ion-slide>
+
+    <ion-slide>
+
+      <p>Wenn Du willst, kannst Du uns auch noch deine Adresse verraten. :)</p>
+
+      <form [formGroup]="registerForm">
+
+        <ion-item>
+          <ion-label floating>
+            Straße:
+          </ion-label>
+          <ion-input [formControl]="registerForm.controls['street']" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>
+            Postleitzahl:
+          </ion-label>
+          <ion-input [formControl]="registerForm.controls['zipcode']" type="tel" maxlength="5" minlength="5"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>
+            Ort:
+          </ion-label>
+          <ion-input [formControl]="registerForm.controls['place']" type="text"></ion-input>
+        </ion-item>
+
+        <div
+          *ngIf="!registerForm.controls.place.valid && registerForm.controls.place.dirty && registerForm.controls.place.touched"
+          class="validator-error">
+          Der Ort sollte nur Buchstaben enthalten.
+        </div>
+
+        <ion-row>
+          <ion-col text-center>
+            <button ion-button block [disabled]="!registerForm.valid" color="primary" (click)="register()">
+              Registrieren
+            </button>
+          </ion-col>
+        </ion-row>
+
+      </form>
+    </ion-slide>
+
+  </ion-slides>
+
+</ion-content>

@@ -1,0 +1,44 @@
+page-find-modal {
+
+  .pictureContainer {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
+  .pictures {
+    height: 5em;
+    padding: .3em;
+  }
+
+  .speciesHelp {
+    color: darkgray;
+    font-style: italic;
+    font-size: 0.7em;
+  }
+
+  .alert {
+    color: red;
+    font-size: .7em;
+    font-style: italic;
+  }
+
+  .invalid{
+    border-bottom: 1px solid rgba(255, 0, 0, 0.71);
+  }
+
+  .item-md.item-block .item-inner {
+    padding: 0px !important;
+  }
+
+  .mandatory {
+    color: red;
+    font-weight: bold;
+  }
+
+  .picture_head {
+    color: darkgrey;
+    font-size: .7em;
+    font-style: italic;
+  }
+
+}

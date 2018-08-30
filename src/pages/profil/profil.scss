@@ -1,0 +1,30 @@
+page-profil {
+
+  .addFind {
+    margin-bottom: .5em;
+  }
+
+  .flexcontainer {
+    overflow: hidden;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+  }
+
+  .register {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .validator-error {
+    color: red;
+    padding-top: 8px;
+    padding-left: 16px;
+  }
+
+  .passwordForgot {
+    border: #ff0000
+  }
+
+
+}

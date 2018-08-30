@@ -1,0 +1,50 @@
+page-home {
+
+  @keyframes jump {
+    0%{
+      transform: translateY(0);
+    }
+    20%{
+      transform: translateY(0);
+    }
+    40%{
+      transform: translateY(-20px);
+    }
+    50%{
+      transform: translateY(0);
+    }
+    60%{
+      transform: translateY(-10px);
+    }
+    80%{
+      transform: translateY(0);
+    }
+    100%{
+      transform: translateY(0);
+    }
+  }
+
+  #preview {
+    overflow: auto;
+    height: 3em;
+    width: 3em;
+    float: left;
+  }
+
+  #facts {
+    overflow: auto;
+    padding-left: 1em;
+  }
+
+  .fabFinds {
+    margin-bottom: .5em;
+  }
+
+  .fabNoFinds {
+    margin-bottom: .5em;
+    animation: jump 1.5s ease 0s infinite normal;
+  }
+
+
+
+}

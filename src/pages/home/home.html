@@ -1,0 +1,46 @@
+<ion-header>
+
+  <ion-navbar hideBackButton="true">
+    <button ion-button menuToggle>
+      <ion-icon name="menu" color="primary"></ion-icon>
+    </button>
+    <ion-buttons right>
+      <button ion-button (click)="info()">
+        <ion-icon name="help-circle" color="primary" style="zoom:1.5;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Meine Meldungen</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="!hasEntries; else Entries">
+
+    <h2 padding>Leider hast Du noch keine Meldungen angelegt</h2>
+
+  </div>
+
+  <ng-template #Entries>
+    <h2 padding>Hier sind deine Meldungen</h2>
+    <ion-list>
+      <ion-card class="text" *ngFor="let find of dbFinds">
+        <div *ngIf="find.speciesPicture" id="preview">
+          <img src="{{find.speciesPicture[0]}}">
+        </div>
+        <div id="facts">
+          <h2>{{ find.species }}</h2>
+          <p>{{ find.location_address }}</p>
+          <p>{{ find.date }}</p>
+        </div>
+      </ion-card>
+    </ion-list>
+  </ng-template>
+
+  <ion-fab center bottom [ngClass]="{'fabFinds': hasEntries, 'fabNoFinds': !hasEntries}">
+    <button ion-fab (click)="reportFind()" color="primary">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

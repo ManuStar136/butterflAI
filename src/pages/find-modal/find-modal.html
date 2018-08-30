@@ -1,0 +1,133 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+      Art melden
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-slides pager="true" (ionSlideDrag)="slideChanged()">
+
+    <ion-slide class="picture">
+      <div padding>
+        Mach ein Foto von der gefundenen Art!
+      </div>
+      <div padding>
+        <button [disabled]="pictureLimit" ion-button (click)="photoOption(null)">
+          <ion-icon name="camera"> Foto hinzufügen</ion-icon>
+        </button>
+        <div padding class="alert" *ngIf="pictureLimit">
+          Du kannst leider nur 5 Bilder hinzufügen. Tippe auf ein Bild, um es zu ändern oder zu löschen.
+        </div>
+      </div>
+      <div *ngIf="pictures[0]">
+        <p class="picture_head">Deine Bilder:</p>
+        <div class="pictureContainer">
+          <div class="pictures" *ngFor="let picture of pictures; let i = index">
+            <img src="{{ picture }}" #image (click)="alterPic(i ,image)">
+          </div>
+        </div>
+      </div>
+      <div class ="ion-canvas" style="display:none">
+        <canvas #canvas id="canvas" width="720px" height="576px"></canvas>
+      </div>
+    </ion-slide>
+
+    <!-- We need virtualScroll so that the 3665 displayed species won't affect the performance of the app -->
+    <ion-slide class="species">
+      <form [formGroup]="butterflyForm">
+        <div padding>
+          Welche Art hast Du gefunden?
+        </div>
+        <ion-item>
+          <ion-label stacked style="font-size: 1em;">Name der Art:<sup class="mandatory">*</sup></ion-label>
+          <select-searchable
+            item-content
+            [formControl]="butterflyForm.controls.species"
+            [hasVirtualScroll]="true"
+            [items]="species"
+            [canSearch]="true"
+            (onChange)="speciesChange($event)">
+          </select-searchable>
+        </ion-item>
+        <div padding class="speciesHelp">
+          <p style="font-size: 1.1em;">Falls Du dir nicht sicher bist, schau mal <a href="#"
+                                                         onclick="window.open('http://www.lepiforum.de/lepiwiki.pl', '_system', 'location=yes'); return false;">hier</a>
+            vorbei</p>
+        </div>
+      </form>
+    </ion-slide>
+
+    <ion-slide class="location">
+
+      <form [formGroup]="butterflyForm">
+        <div padding>
+          Sag uns, wo Du die Art gefunden hast!
+        </div>
+        <ion-item>
+          <ion-label stacked style="font-size: 1em;">Fundort:<sup class="mandatory">*</sup></ion-label>
+          <!-- when the user clicks into the location field, his location will be determined -->
+          <ion-input [readonly]="isReadonly()" placeholder="Tippe um einen Fundort auszuwählen"
+                     [formControl]="butterflyForm.controls['location_address']" type="text"
+                     (tap)="getLocation()"></ion-input>
+        </ion-item>
+        <div class="alert" *ngIf="!butterflyForm.controls['location'].valid && ionSlideNextStart">Das musst Du uns
+          verraten...
+        </div>
+        <ion-item>
+          <ion-label rows="3" maxlength="200" stacked style="font-size: 1em;">Bemerkung zum Fundort:</ion-label>
+          <ion-textarea [formControl]="butterflyForm.controls.location_comment" type="textarea"
+                        placeholder="Sag uns was zum genauen Fundort..."></ion-textarea>
+        </ion-item>
+      </form>
+    </ion-slide>
+
+    <ion-slide class="additionalInfo">
+      <form [formGroup]="butterflyForm">
+        <div padding>
+          Hast Du noch weitere Infos? Gerne kannst Du diese hier mit uns teilen!
+        </div>
+        <ion-item >
+          <ion-label stacked style="font-size: 1em;">Anzahl</ion-label>
+          <ion-input [ngClass]="{'invalid': !butterflyForm.controls['quantity'].valid && butterflyForm.controls['quantity'].dirty}" [formControl]="butterflyForm.controls.quantity" text-right type="number" min=1></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked style="font-size: 1em;">Stadium</ion-label>
+          <ion-select [formControl]="butterflyForm.controls.stadium" type="text" multiple="false" cancelText="Abbrechen"
+                      interface="popover">
+            <ion-option *ngFor="let stadium of stadiumData" [value]="stadium.value">{{stadium.text}}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked style="font-size: 1em;">Datum</ion-label>
+          <ion-datetime max="{{currentDate | date: 'yyyy-MM-dd'}}" displayFormat="YYYY.MM.DD" [formControl]="butterflyForm.controls.date"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked rows="3" maxlength="200" stacked style="font-size: 1em;">Bemerkung:</ion-label>
+          <ion-textarea [formControl]="butterflyForm.controls.comment" type="textarea"
+                        placeholder="Willst Du uns sonst noch etwas sagen?"></ion-textarea>
+        </ion-item>
+
+
+        <ion-row>
+          <ion-col text-center>
+            <button ion-button block [disabled]="!butterflyForm.valid" color="primary" (click)="submit()">
+              Senden
+            </button>
+          </ion-col>
+        </ion-row>
+
+      </form>
+
+    </ion-slide>
+
+
+  </ion-slides>
+</ion-content>

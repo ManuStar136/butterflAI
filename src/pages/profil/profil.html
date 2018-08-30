@@ -1,0 +1,138 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu" color="primary"></ion-icon>
+    </button>
+    <ion-buttons right *ngIf="user">
+      <button ion-button full (click)="info()">
+        <ion-icon name="help-circle" color="primary" style="zoom:1.5;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Profil</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <div *ngIf="user; then profilSettings else loginMask"></div>
+
+  <ng-template #loginMask>
+
+    <form [formGroup]="credentialsForm">
+
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input ngClass="{'passwordForgot' : passwordForgot}" [formControl]="credentialsForm.controls['email']"
+                   type="email"></ion-input>
+      </ion-item>
+
+      <div *ngIf="!credentialsForm.controls.email.valid &&
+        credentialsForm.controls.email.dirty && credentialsForm.controls.email.touched || passwordForgot"
+           class="validator-error">
+        Bitte gib eine gültige Email ein.
+      </div>
+
+      <ion-item>
+        <ion-label floating>Passwort</ion-label>
+        <ion-input [formControl]="credentialsForm.controls['password']" type="password">
+        </ion-input>
+      </ion-item>
+
+      <div *ngIf="!credentialsForm.controls.password.valid &&
+        credentialsForm.controls.password.dirty && credentialsForm.controls.password.touched"
+           class="validator-error">
+        Das Passwort muss zwischen 8 und 16 Zeichen lang sein, einen Groß- und Kleinbuchstaben, eine Zahl sowie ein
+        Sonderzeichen enthalten.
+      </div>
+
+      <ion-row>
+        <ion-col text-center>
+          <button ion-button block color="primary"
+                  (click)="onSignIn()">
+            Einloggen
+          </button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col text-center>
+          <button ion-button clear small (click)="onForgotPassword()">
+            Passwort vergessen?
+          </button>
+        </ion-col>
+      </ion-row>
+
+    </form>
+
+    <div class="flexcontainer">
+      <div class="impressum">
+        <button ion-button small (click)="showImpressum({title: 'Impressum'})" clear>Impressum</button>
+      </div>
+      <div class="gdpr">
+        <button ion-button small (click)="showGDPR({title: 'Datenschutz'})" clear>Datenschutz</button>
+      </div>
+    </div>
+    <div class="register">
+      <button ion-button small (click)="register()" clear>Noch keinen Account? Registrieren!</button>
+    </div>
+
+    <ion-fab center bottom class="addFind">
+      <button ion-fab [hidden]="!user" (click)="reportFind()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-fab>
+
+  </ng-template>
+
+  <ng-template #profilSettings>
+
+    <div *ngIf="profilData" padding>
+      <ion-item>
+        <ion-label stacked  style="font-size: 1em;">Name:</ion-label>
+        <ion-input [disabled]="true" type="text" [(ngModel)]="profilData.firstName"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked  style="font-size: 1em;">Nachname:</ion-label>
+        <ion-input [disabled]="true" type="text" [(ngModel)]="profilData.lastName"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked  style="font-size: 1em;">Adresse:</ion-label>
+        <ion-input [disabled]="!changeData" type="text" [(ngModel)]="profilData.street"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked  style="font-size: 1em;">Postleitzahl:</ion-label>
+        <ion-input [disabled]="!changeData" type="tel" maxlength="5" minlength="5" [(ngModel)]="profilData.zipcode"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked  style="font-size: 1em;">Ort:</ion-label>
+        <ion-input [disabled]="!changeData" type="text" [(ngModel)]="profilData.place"></ion-input>
+      </ion-item>
+    </div>
+
+    <ion-buttons>
+      <div class="flexcontainer">
+        <button *ngIf="!changeData" ion-button clear block padding (click)="modifyData()">Ändern</button>
+        <button *ngIf="changeData" ion-button clear block padding (click)="saveData()">Speichern</button>
+        <button ion-button clear block padding (click)="onSignOut()">Ausloggen</button>
+      </div>
+
+    </ion-buttons>
+    <div class="flexcontainer">
+      <div class="impressum">
+        <button ion-button small (click)="showImpressum({title: 'Impressum'})" clear>Impressum</button>
+      </div>
+      <div class="gdpr">
+        <button ion-button small (click)="showGDPR({title: 'Datenschutz'})" clear>Datenschutz</button>
+      </div>
+    </div>
+
+  </ng-template>
+
+</ion-content>

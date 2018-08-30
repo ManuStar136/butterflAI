@@ -1,0 +1,7 @@
+{
+  "name": "schmetterlinge",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
