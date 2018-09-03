@@ -16,9 +16,9 @@ and Angular DI.
 export class FindingModalProvider {
 
   butterflies: Observable<any>;
-  serverurl = 'https://e4f6533f-2faa-4913-b93d-3d3ec6458247-bluemix.cloudant.com/butterflai';
-  usr : String = 'fientandeeseenewstarneve';
-  pw: String = '737e30ac399ea9f45bbf4bb196c2444f3d4f8fa0';
+  serverurl = 'https://2382d9ef-c3cb-49ad-9b3f-df746e1b067e-bluemix.cloudant.com/butterflai';
+  usr : String = '2382d9ef-c3cb-49ad-9b3f-df746e1b067e-bluemix';
+  pw: String = '9764a86d78fa6fac42479b741c6cdccc07b76a85a21651b9a07165cfa5ad5f8e';
 
   constructor(private camera: Camera,
     private db: AngularFireDatabase,
@@ -65,7 +65,7 @@ export class FindingModalProvider {
   sendEval(data: any): Observable<any> {
     var headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': "Basic ZmllbnRhbmRlZXNlZW5ld3N0YXJuZXZlOjczN2UzMGFjMzk5ZWE5ZjQ1YmJmNGJiMTk2YzI0NDRmM2Q0ZjhmYTA="
+      'Authorization': "Basic MjM4MmQ5ZWYtYzNjYi00OWFkLTliM2YtZGY3NDZlMWIwNjdlLWJsdWVtaXg6OTc2NGE4NmQ3OGZhNmZhYzQyNDc5Yjc0MWM2Y2RjY2MwN2I3NmE4NWEyMTY1MWI5YTA3MTY1Y2ZhNWFkNWY4ZQ=="
     });
     console.log(headers);
     return this.http.post(this.serverurl, data, {headers});
