@@ -27,11 +27,15 @@ export class FindModalPage {
   canvas : HTMLCanvasElement;
   ctx : any;
   token = "";
-  urlToken = 'https://ibm-watson-ml.mybluemix.net/v3/identity/token';
+  urlToken = 'https://eu-gb.ml.cloud.ibm.com/v3/identity/token';
+  // urlToken = 'https://eu-gb.ml.cloud.ibm.com/';
   // var urlService = 'https://ibm-watson-ml.mybluemix.net/v3/wml_instances/15ce63e2-7c61-44dc-b46a-a33220223e70/published_models/b3463e38-9539-49c6-8976-08e77ef57bfb/deployments/9a915e0c-a028-42b6-888c-6a4350b14f9a/online';
-  urlServiceNew = 'https://ibm-watson-ml.mybluemix.net/v3/wml_instances/15ce63e2-7c61-44dc-b46a-a33220223e70/published_models/b77ff1e4-8b01-4110-8470-72a63bc489ee/deployments/5418cdbb-4a6c-4b61-907b-21b900a23d10/online';
-  usr = '0c758f90-e6c4-4df9-981b-aa2206dd2701';
-  pw = 'bf97e385-f591-415e-8fc6-eb10c9564972';
+  // urlServiceNew = 'https://ibm-watson-ml.mybluemix.net/v3/wml_instances/15ce63e2-7c61-44dc-b46a-a33220223e70/published_models/b77ff1e4-8b01-4110-8470-72a63bc489ee/deployments/5418cdbb-4a6c-4b61-907b-21b900a23d10/online';
+  urlServiceNew = 'https://eu-gb.ml.cloud.ibm.com/v3/wml_instances/d373b28e-5b23-4a49-a587-32dc98ee8216/deployments/499ada98-9775-4fb2-949c-6640b1d35f64/online';
+  // usr = '0c758f90-e6c4-4df9-981b-aa2206dd2701';
+  usr = '77c74ada-0a7a-422a-898b-7d64dc7f9e6a';
+  // pw = 'bf97e385-f591-415e-8fc6-eb10c9564972';
+  pw = '672caf0a-18df-4976-9ac5-20f57d1c2408';
   usrSpecies : String = '';
 
   //res = '{"fields": ["prediction"], "values": [[0.07892626523971558, 0.004959745332598686, 0.00044968651491217315, 0.05625692382454872, 0.029514044523239136, 0.8202618360519409, 0.0022929867263883352, 0.0037869028747081757, 9.162574860965833e-05, 0.0024810812901705503, 0.0009788612369447947]]}';
@@ -546,6 +550,8 @@ export class FindModalPage {
       var headers : any = {
         "Authorization": "Basic " + btoa(this.usr+":"+this.pw)
       }
+
+      console.log((this.urlToken));
 
       this.http.get(this.urlToken, {}, headers)
       .then(data => {

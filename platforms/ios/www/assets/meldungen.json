@@ -1,0 +1,34 @@
+{
+	"items": [
+		{
+			"name": "Gesendete Meldungen",
+			"children": [
+				{
+					"name": "Gesendete Art",
+					"destination": "Stuttgart, 70565",
+					"findDate": "24.05.2018"
+				}
+			]
+		},
+		{
+			"name": "Nicht gesendete Meldungen",
+			"children": [
+				{
+					"name": "Nicht gesendete Art",
+					"destination": "Stuttgart, 70565",
+					"findDate": "25.05.2018"
+				}
+			]
+		},
+		{
+			"name": "Unvollständige Meldungen",
+			"children": [
+				{
+					"name": "Unvollständige Art",
+					"destination": "Stuttgart, 70565",
+					"findDate": "26.05.2018"
+				}
+			]
+		}
+	]
+}
